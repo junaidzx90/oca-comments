@@ -1,0 +1,387 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+ 
+ .commentheader {
+	padding: 10px 0px;
+	border-bottom: 2px solid #ddd;
+}
+.commentheader p{
+    margin: 0;
+    text-transform: uppercase;
+}
+#filter-comments {
+	margin: 10px 0px 30px;
+}
+#authorname {
+	width: 100%;
+	padding: 10px;
+	min-height: 42px;
+    padding-left: 46px;
+}
+.searchbox {
+	position: relative;
+}
+.searchIcon {
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	display: inline-flex;
+    cursor: pointer;
+}
+.searchIcon svg{
+    fill: var(--ast-global-color-0) !important;
+}
+
+.loading-wrapper {
+	width: 32px;
+	height: 32px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+	left: 0;
+}
+  
+.bar {
+	display: block;
+	height: 12px;
+	width: 2px;
+	background: var(--ast-global-color-0) !important;
+	margin-right: 5px;
+	animation: scale 1.1s ease-in-out infinite;
+	transform-origin: 50% 50%;
+	box-shadow: 2px 2px 2px #00000057;
+}
+.bar.one {
+    animation-delay: 1s;
+}
+  
+.bar.two {
+    animation-delay: 1.2s;
+}
+  
+.bar.three {
+    animation-delay: 1.3s;
+}
+  
+@keyframes scale {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+}
+a.commentslink:hover {
+    text-decoration: underline;
+    color: var(--ast-global-color-0) !important;
+}
+.widget_filter_widget .widget-title {
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 5px;
+}
+
+.author_stars_box .comcounts {
+    font-size: 14px;
+    text-transform: lowercase;
+    color: #7e7e7e !important;
+    text-decoration: underline;
+}
+.author_stars_box p {
+    display: inline-flex;
+    line-height: 20px;
+    margin: 0;
+    padding: 0px 20px;
+    gap: 12px;
+}
+li.top10item .info .author_stars_box p {
+    padding: 0 !important;
+}
+.author_stars_box img{
+   border-radius: unset !important;
+}
+
+.comment__head {
+    border-bottom: 1px solid rgba(167, 167, 167, 0.172);
+    /* padding: 5px 10px; */
+    display: flex;
+    gap: 20px;
+}
+
+.comment_text p {
+    margin: 0;
+}
+.total__comments {
+    display: flex;
+    gap: 10px;
+}
+
+div#commenter_info {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.commenter__header {
+    margin-bottom: 50px;
+}
+.total__comments {
+    display: flex;
+    gap: 10px;
+    background: #ff980021;
+    padding: 5px;
+    justify-content: center;
+    margin-top: 10px;
+}
+h3.comment_author {
+    color: var(--ast-global-color-0) !important;
+    font-size: 40px;
+    font-weight: 600;
+}
+.in_replay_to .comment__box {
+    background: #ffd89e21;
+}
+.in_replay_to {
+    /* padding: 10px; */
+	padding-bottom: 0;
+}
+.in_replay_to p {
+    margin: 0;
+}
+.comment_text {
+    /* padding: 10px; */
+    display: flex;
+    gap: 10px;
+}
+span.replayIcon {
+    font-size: 30px;
+    color: var(--ast-global-color-0);
+    line-height: 30px;
+}
+span.readmore__comment{
+	color: var(--ast-global-color-0);
+	cursor: pointer;
+	user-select: none;
+}
+span.readmore__comment:hover{
+	text-decoration: underline;
+}
+h3.comment_author img {
+    width: 60px;
+}
+.comment_devider {
+    border-bottom: 3px solid var(--ast-global-color-0);
+    width: 50%;
+    margin: 38px auto;
+}
+a._comments_count {
+    text-decoration: underline;
+}
+
+.popupHeader{
+    position: relative;
+}
+span.avatar_popup_close, span.animatedPopup_popup_close {
+    transform: rotate(45deg);
+    font-size: 28px;
+    line-height: 28px;
+    cursor: pointer;
+    user-select: none;
+}
+
+body > div.animatedPopup > div.popupHeader > span.animatedPopup_popup_close {
+    position: absolute;
+    right: -27px;
+    top: -30px;
+    outline: unset;
+    border: unset;
+    text-decoration: none;
+    color: red;
+}
+
+.animatedPopup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border: 2px solid #c3c3c3;
+    box-shadow: 0px 1px 12px -9px black;
+    border-radius: 3px;
+    z-index: 9999;
+}
+.unsupportbrowserBtnBox {
+    text-align: center;
+}
+.animatedPopup {
+    padding: 32px;
+    width: 600px;
+}
+
+ul#oca-comments{
+    list-style: none;
+    margin: 0;
+}
+
+h2#reply-title {
+    display: flex !important;
+    align-items: baseline !important;
+    justify-content: space-between !important;
+}
+.comment-form-textarea.ast-grid-common-col {
+    padding: 0px 10px !important;
+}
+.ast-comment-edit-reply-wrap {
+    justify-content: space-between !important;
+    display: flex;
+}
+
+.imageWrap {
+    width: 50%;
+}
+.animatedImageBox {
+    width: 228px;
+    height: 228px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.animatedImageBox img{
+    width: 100%;
+    height: 100%;
+}
+.avatar_contents,
+.animatedPopup_contents{
+    padding: 10px;
+}
+.animatedPopup_contents {
+    display: flex;
+    gap: 20px;
+}
+.popupdescription {
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+.popupdescription p {
+	margin: 0;
+}
+.animatedPopup_contents p {
+    margin: 0;
+}
+.avatar_contents p ,
+.animatedPopup_contents p{
+    margin: 0;
+}
+
+ul#oca-comments li article {
+    margin-bottom: 5px;
+}
+
+ul#top10users {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+li.top10item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+li.top10item:before {
+    content: attr(data-id);
+    display: inline-block;
+    min-width: 20px;
+    line-height: 18px;
+    font-size: 18px;
+    color: #000;
+}
+.info a._comments_count {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.top10stars{
+    padding: 0 !important;
+}
+
+/* commenter List */
+.commenter_list .clistTable .listRow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.commenter_list .clistTable .listRow:last-child {
+    border-bottom: none;
+}
+.commenter_list .clistTable .listRow .profileImg img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.commenter_list .clistTable .listRow .comment_status .author_stars_box p {
+    padding: 0;
+}
+.commenter_list .clistTable .listRow .comment_status a.commentername {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.commenter_list .clistTable .listRow .comment_status .author_stars_box p {
+    padding: 0;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.commenter_list .clistTable .listRow .comment_status {
+    padding-left: 10px;
+}
+.commenter_list .clistTable .listRow .comment_status a {
+    color: #fab11e;
+}
+
+.fcnone{
+    display: none !important;
+}
+@media only screen and (max-width: 980px) {
+    .animatedPopup {
+        padding: 25px;
+    }
+    body > div.animatedPopup > div.popupHeader > a {
+        right: -21px;
+        top: -24px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .animatedPopup {
+        width: 90%;
+    }
+    .animatedImageBox {
+        width: 170px;
+        height: 170px;
+    }
+}
+@media only screen and (max-width: 480px) {
+	h3.comment_author{
+		font-size: 24px;
+	}
+	h3.comment_author img {
+		width: 40px;
+	}
+    .animatedPopup_contents {
+        flex-direction: column;
+    }
+    .imageWrap {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .imageWrap, .popupdescription {
+        width: 100%;
+    }
+}
