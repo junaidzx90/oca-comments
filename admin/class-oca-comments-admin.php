@@ -695,7 +695,7 @@ class OCA_Comments_Admin {
 
 	// Send email
 	function sendActiveCampaignEvent( $comment_author_email, $star){
-		$eventString = 1;
+		$eventString = '';
 		switch ($star) {
 			case 1:
 				$eventString = "1-star";
@@ -738,31 +738,46 @@ class OCA_Comments_Admin {
 	}
 
 	// triggerActivecampaign
-	function triggerActivecampaign( $comment_author_email ){
-		$eventString = ['target1', 'target2', 'target3', 'target4', 'target5'];
+	function triggerActivecampaign( $position, $comment_author_email ){
+		$eventString = '';
+		switch ($position) {
+			case 0:
+				$eventString = 'target1';
+				break;
+			case 1:
+				$eventString = 'target2';
+				break;
+			case 2:
+				$eventString = 'target3';
+				break;
+			case 3:
+				$eventString = 'target4';
+				break;
+			case 4:
+				$eventString = 'target5';
+				break;
+		}
 
 		$actid = get_option('activecampaign_account_id');
 		$account_email = get_option('activecampaign_account_email');
 		$event_key = get_option('activecampaign_event_key');
 		
 		if($actid && $event_key){
-			foreach($eventString as $event){
-				$ac = new ActiveCampaign(ACTIVECAMPAIGN_URL, ACTIVECAMPAIGN_API_KEY);
-				$ac->track_actid = $actid;
-				$ac->track_key = $event_key;
-	
-				if($account_email){
-					$ac->track_email = $account_email;
-				}else{
-					$ac->track_email = $comment_author_email;
-				}
-	
-				$post_data = array(
-					"event" => $event,
-					"eventdata" => ""
-				);
-				$response = $ac->api("tracking/log", $post_data);
+			$ac = new ActiveCampaign(ACTIVECAMPAIGN_URL, ACTIVECAMPAIGN_API_KEY);
+			$ac->track_actid = $actid;
+			$ac->track_key = $event_key;
+
+			if($account_email){
+				$ac->track_email = $account_email;
+			}else{
+				$ac->track_email = $comment_author_email;
 			}
+
+			$post_data = array(
+				"event" => $eventString,
+				"eventdata" => "Success"
+			);
+			$response = $ac->api("tracking/log", $post_data);
 		}
 	}
 
@@ -785,7 +800,7 @@ class OCA_Comments_Admin {
 
 			$post_data = array(
 				"event" => 'celebration',
-				"eventdata" => ""
+				"eventdata" => "Success"
 			);
 			$response = $ac->api("tracking/log", $post_data);
 		}
@@ -985,9 +1000,12 @@ class OCA_Comments_Admin {
 		}
 
 		if(sizeof($popupsArr)){
-			foreach($popupsArr as $rr){
+			foreach($popupsArr as $key => $rr){
 				if(intval($rr['comments']) === $comments){
-					return $rr;
+					return [
+						'position' => $key,
+						'data' => $rr
+					];
 				}
 			}
 		}
@@ -1099,7 +1117,6 @@ class OCA_Comments_Admin {
 			// Get top priorities popup
 			$topPopup = $this->check_top_priorities_comments($comments);
 
-
 			$celebratsData = get_option("nextcelebration_popup");
 			$nextcelebrationArr = [];
 			if($celebratsData && is_array($celebratsData)){
@@ -1117,9 +1134,9 @@ class OCA_Comments_Admin {
 				$this->triggerActivecampaignCelebration($comment_author_email);
 			}elseif($topPopup){
 				$isPopupOpen = false;
-				$_SESSION['top_priorities_popup'] = json_encode($topPopup);
+				$_SESSION['top_priorities_popup'] = json_encode($topPopup['data']);
 				// trigger events 
-				$this->triggerActivecampaign($comment_author_email);
+				$this->triggerActivecampaign($topPopup['position'], $comment_author_email);
 			}elseif(!empty($gotStar) && $isPopupOpen){
 				$isPopupOpen = false;
 				$_SESSION['got_new_star'] = "true";
