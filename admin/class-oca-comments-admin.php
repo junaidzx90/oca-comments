@@ -1122,12 +1122,13 @@ class OCA_Comments_Admin {
 			if($celebratsData && is_array($celebratsData)){
 				$nextcelebrationArr = $celebratsData;
 			}
-			$targetComments = 0;
+			$calebration = 0;
 			if(array_key_exists("target", $nextcelebrationArr)){
-				$targetComments = intval($nextcelebrationArr['target']);
+				$calebration = intval($nextcelebrationArr['target']);
 			}
 
-			if($comments === $targetComments){
+			$total_comments = $wpdb->query("SELECT * FROM {$wpdb->prefix}comments WHERE `comment_approved` = 1");
+			if($total_comments === $calebration){
 				$isPopupOpen = false;
 				$_SESSION['nextcelebration_popup'] = json_encode($nextcelebrationArr);
 				// Trigger event 

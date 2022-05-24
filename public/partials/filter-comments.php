@@ -11,7 +11,6 @@ global $post;
  * @package    OCA_Comments
  * @subpackage OCA_Comments/public/partials
  */
-
 ?>
 
 
