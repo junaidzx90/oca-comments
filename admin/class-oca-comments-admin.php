@@ -261,6 +261,9 @@ class OCA_Comments_Admin {
 		// Last Comment
 		add_settings_field( 'ac_last_comment', 'Last Comment', [$this, 'ac_last_comment_cb'], 'oca_activecampaign_opt_page','oca_activecampaign_opt_section' );
 		register_setting( 'oca_activecampaign_opt_section', 'ac_last_comment' );
+		// Last Commented on post
+		add_settings_field( 'ac_last_commented_post', 'Last Commented on post', [$this, 'ac_last_commented_post_cb'], 'oca_activecampaign_opt_page','oca_activecampaign_opt_section' );
+		register_setting( 'oca_activecampaign_opt_section', 'ac_last_commented_post' );
 
 
 		// Top 10 results page
@@ -685,6 +688,19 @@ class OCA_Comments_Admin {
 		}
 		echo '</select>';
 	}
+	function ac_last_commented_post_cb(){
+		global $activecampaignFields;
+		$value = get_option( 'ac_last_commented_post' );
+
+		echo '<select name="ac_last_commented_post" id="ac_last_commented_post">';
+		echo '<option value="">Select a field</option>';
+		if(is_array($activecampaignFields)){
+			foreach($activecampaignFields as $field){
+				echo '<option '.(($value === $field['id']) ? 'selected' : '').' value="'.$field['id'].'">'.$field['title'].'</option>';
+			}
+		}
+		echo '</select>';
+	}
 
 	// Top results shortcode
 	function oca_top_results_cb(){
@@ -807,7 +823,7 @@ class OCA_Comments_Admin {
 	}
 
 	// Update contact
-	function activecampaign_update_contact($commenterObj){
+	function activecampaign_update_contact($post_url, $commenterObj){
 		$email = $commenterObj['email'];
 		$star = intval($commenterObj['star']);
 		$comments = $commenterObj['comments'];
@@ -819,6 +835,7 @@ class OCA_Comments_Admin {
 
 		$new_field_id = get_option( 'ac_new_field' );
 		$last_comment_id = get_option( 'ac_last_comment' );
+		$last_commented_post_id = get_option( 'ac_last_commented_post' );
 		$star_id = get_option( 'ac_stars_field' );
 		$comments_id = get_option( 'ac_number_of_comments' );
 		$missing_id = get_option( 'ac_number_of_missing_comments' );
@@ -865,6 +882,10 @@ class OCA_Comments_Admin {
 					[
 						"field" => $last_comment_id,
 						"value" => date("F j, Y")
+					],
+					[
+						"field" => $last_commented_post_id,
+						"value" => $post_url
 					]
 				]
 			]
@@ -1090,7 +1111,8 @@ class OCA_Comments_Admin {
 			);
 			
 			// update activecampaign contact
-			$this->activecampaign_update_contact($array_commenterObj);
+			$post_url = get_the_permalink( $current_post );
+			$this->activecampaign_update_contact($post_url, $array_commenterObj);
 
 			if(isset($_SESSION['got_new_star']))
 				unset($_SESSION['got_new_star']);
